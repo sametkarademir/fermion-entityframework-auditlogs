@@ -37,7 +37,11 @@ builder.Services.AddFermionAuditLogServices<ApplicationDbContext>(opt =>
     ];
     opt.LogChangeDetails = true;
     opt.MaxValueLength = 5000;
-    opt.LoggedStates = States.Added | States.Modified | States.Deleted;
+    opt.LoggedStates = [
+        States.Added,
+        States.Modified,
+        States.Deleted
+    ];
     opt.ApiRoute = "api/audit-logs";
     opt.EnableApiEndpoints = true;
     opt.Authorization.RequireAuthentication = false;

@@ -4,10 +4,19 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <PackageId>Fermion.EntityFramework.AuditLogs</PackageId>
+        <Version>0.0.1</Version>
+        <Authors>Samet Karademir</Authors>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <RepositoryUrl>https://github.com/sametkarademir/fermion-entityframework-auditlogs</RepositoryUrl>
+        <PackageReadmeFile>readme.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="Presentation\"/>
+        <None Update="readme.md">
+            <Pack>true</Pack>
+            <PackagePath>/</PackagePath>
+        </None>
     </ItemGroup>
 
     <ItemGroup>

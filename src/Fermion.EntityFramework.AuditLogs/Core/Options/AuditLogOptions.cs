@@ -105,7 +105,11 @@ public class AuditLogOptions
     /// For example, if you want to log only added and modified changes,
     /// you can set this property to States.Added | States.Modified.
     /// </remarks>
-    public States LoggedStates { get; set; } = States.Added | States.Modified | States.Deleted;
+    public List<States> LoggedStates { get; set; } = [
+        States.Added,
+        States.Modified,
+        States.Deleted
+    ];
 
     /// <summary>
     /// Determines whether entities with a specific change state should be logged
@@ -114,7 +118,7 @@ public class AuditLogOptions
     /// <returns>True: Should be logged, False: Should not be logged</returns>
     public bool ShouldLogState(States state)
     {
-        return (LoggedStates & state) != 0;
+        return LoggedStates.Contains(state);
     }
 
     /// <summary>
