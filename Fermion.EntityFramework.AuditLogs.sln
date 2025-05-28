@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{22C2FAB9-3085-4AE9-9723-DE5FEB5BF414}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fermion.EntityFramework.AuditLogs", "src\Fermion.EntityFramework.AuditLogs\Fermion.EntityFramework.AuditLogs.csproj", "{ADC2F9FF-527F-4A74-BE4F-340E942DFB80}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{7A9BDCAE-0C66-4983-927F-8C44FB734D31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "sample\WebApi\WebApi.csproj", "{B2FD2C0F-F19B-4909-AB89-C24CABDFFC03}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ADC2F9FF-527F-4A74-BE4F-340E942DFB80} = {22C2FAB9-3085-4AE9-9723-DE5FEB5BF414}
+		{B2FD2C0F-F19B-4909-AB89-C24CABDFFC03} = {7A9BDCAE-0C66-4983-927F-8C44FB734D31}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ADC2F9FF-527F-4A74-BE4F-340E942DFB80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADC2F9FF-527F-4A74-BE4F-340E942DFB80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADC2F9FF-527F-4A74-BE4F-340E942DFB80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADC2F9FF-527F-4A74-BE4F-340E942DFB80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2FD2C0F-F19B-4909-AB89-C24CABDFFC03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2FD2C0F-F19B-4909-AB89-C24CABDFFC03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2FD2C0F-F19B-4909-AB89-C24CABDFFC03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2FD2C0F-F19B-4909-AB89-C24CABDFFC03}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
