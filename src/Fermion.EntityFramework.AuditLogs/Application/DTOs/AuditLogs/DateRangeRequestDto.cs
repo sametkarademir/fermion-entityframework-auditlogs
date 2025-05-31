@@ -2,13 +2,13 @@ using FluentValidation;
 
 namespace Fermion.EntityFramework.AuditLogs.Application.DTOs.AuditLogs;
 
-public class DataRangeRequestDto
+public class DateRangeRequestDto
 {
     public DateTime StartDate { get; set; } = DateTime.Today.AddDays(-7).ToUniversalTime();
     public DateTime EndDate { get; set; } = DateTime.Today.ToUniversalTime();
 }
 
-public class DataRangeRequestValidator : AbstractValidator<DataRangeRequestDto>
+public class DataRangeRequestValidator : AbstractValidator<DateRangeRequestDto>
 {
     public DataRangeRequestValidator()
     {
