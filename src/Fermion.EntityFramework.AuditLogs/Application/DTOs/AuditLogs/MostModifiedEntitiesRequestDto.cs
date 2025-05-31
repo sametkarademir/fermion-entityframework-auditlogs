@@ -2,7 +2,7 @@ using FluentValidation;
 
 namespace Fermion.EntityFramework.AuditLogs.Application.DTOs.AuditLogs;
 
-public class MostModifiedEntitiesRequestDto : DataRangeRequestDto
+public class MostModifiedEntitiesRequestDto : DateRangeRequestDto
 {
     public List<string>? EntityNames { get; set; }
     public Guid? UserId { get; set; }

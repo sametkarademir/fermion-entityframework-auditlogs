@@ -4,7 +4,7 @@ using FluentValidation;
 
 namespace Fermion.EntityFramework.AuditLogs.Application.DTOs.AuditLogs;
 
-public class EntityChangesTrendRequestDto : DataRangeRequestDto
+public class EntityChangesTrendRequestDto : DateRangeRequestDto
 {
     public string EntityName { get; set; } = null!;
     public List<string>? PropertyNames { get; set; }
