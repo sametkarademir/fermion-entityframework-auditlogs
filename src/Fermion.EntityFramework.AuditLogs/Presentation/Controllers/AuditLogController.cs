@@ -1,6 +1,7 @@
 using Fermion.EntityFramework.AuditLogs.Application.DTOs.AuditLogs;
 using Fermion.EntityFramework.AuditLogs.Application.DTOs.EntityPropertyChanges;
 using Fermion.EntityFramework.AuditLogs.Core.Interfaces;
+using Fermion.EntityFramework.AuditLogs.Core.Interfaces.Services;
 using Fermion.EntityFramework.Shared.DTOs.Pagination;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

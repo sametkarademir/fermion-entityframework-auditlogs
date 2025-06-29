@@ -3,6 +3,8 @@ using Fermion.EntityFramework.AuditLogs.Application.DTOs.AuditLogs;
 using Fermion.EntityFramework.AuditLogs.Application.DTOs.EntityPropertyChanges;
 using Fermion.EntityFramework.AuditLogs.Core.Enums;
 using Fermion.EntityFramework.AuditLogs.Core.Interfaces;
+using Fermion.EntityFramework.AuditLogs.Core.Interfaces.Repositories;
+using Fermion.EntityFramework.AuditLogs.Core.Interfaces.Services;
 using Fermion.EntityFramework.Shared.DTOs.Pagination;
 using Fermion.EntityFramework.Shared.DTOs.Sorting;
 using Fermion.EntityFramework.Shared.Extensions;
@@ -17,6 +19,7 @@ namespace Fermion.EntityFramework.AuditLogs.Application.Services;
 /// </summary>
 public class AuditLogAppService(
     IAuditLogRepository auditLogRepository,
+    IEntityPropertyChangeRepository entityPropertyChangeRepository,
     IMapper mapper,
     ILogger<AuditLogAppService> logger)
     : IAuditLogAppService
@@ -47,7 +50,7 @@ public class AuditLogAppService(
     /// <returns>A paginated list of audit log entries.</returns>
     public async Task<PageableResponseDto<AuditLogResponseDto>> GetPageableAndFilterAsync(GetListAuditLogRequestDto request, CancellationToken cancellationToken = default)
     {
-        var queryable = auditLogRepository.Query();
+        var queryable = auditLogRepository.GetQueryable();
         queryable = queryable.Include(item => item.EntityPropertyChanges);
         queryable = queryable.WhereIf(!string.IsNullOrWhiteSpace(request.EntityId), item => item.EntityId == request.EntityId);
         queryable = queryable.WhereIf(!string.IsNullOrWhiteSpace(request.EntityName), item => item.EntityName == request.EntityName);
@@ -80,7 +83,7 @@ public class AuditLogAppService(
     /// </remarks>
     public async Task<EntityChangeSummaryResponseDto> GetEntityChangeSummaryAsync(GetEntityChangeSummaryRequestDto request, CancellationToken cancellationToken = default)
     {
-        var queryable = auditLogRepository.Query();
+        var queryable = auditLogRepository.GetQueryable();
         queryable = queryable.Include(item => item.EntityPropertyChanges);
         queryable = queryable.Where(item => item.EntityId == request.EntityId && item.EntityName == request.EntityName);
         queryable = queryable.Where(item => item.CreationTime >= request.StartDate && item.CreationTime <= request.EndDate);
@@ -138,14 +141,14 @@ public class AuditLogAppService(
     /// <returns>A list of property changes for the specified audit log entry.</returns>
     public async Task<List<EntityPropertyChangeResponseDto>> GetEntityPropertyChangesAsync(Guid auditLogId, CancellationToken cancellationToken = default)
     {
-        var matchedAuditLog = await auditLogRepository.GetAsync(
-            id: auditLogId,
-            include: item => item.Include(a => a.EntityPropertyChanges),
-            enableTracking: false,
-            cancellationToken: cancellationToken
-        );
-        var entityPropertyChanges = matchedAuditLog.EntityPropertyChanges;
-        var mappedEntityPropertyChanges = mapper.Map<List<EntityPropertyChangeResponseDto>>(entityPropertyChanges);
+        var matchedEntityPropertyChanges = await entityPropertyChangeRepository
+            .GetAllAsync(
+                item => item.AuditLogId == auditLogId,
+                orderBy: item => item.OrderBy(epc => epc.PropertyName),
+                enableTracking: false,
+                cancellationToken: cancellationToken
+            );
+        var mappedEntityPropertyChanges = mapper.Map<List<EntityPropertyChangeResponseDto>>(matchedEntityPropertyChanges);
 
         return mappedEntityPropertyChanges;
     }
@@ -158,7 +161,7 @@ public class AuditLogAppService(
     /// <returns>The number of audit log entries that were removed.</returns>
     public async Task<int> CleanupOldAuditLogsAsync(DateTime olderThan, CancellationToken cancellationToken = default)
     {
-        var queryable = auditLogRepository.Query();
+        var queryable = auditLogRepository.GetQueryable();
         queryable = queryable.Where(a => a.CreationTime < olderThan);
         var countToDelete = await queryable.CountAsync(cancellationToken);
         if (countToDelete == 0)
@@ -191,7 +194,7 @@ public class AuditLogAppService(
                     break;
                 }
 
-                await auditLogRepository.DeleteRangeAsync(auditLogsToDelete);
+                await auditLogRepository.DeleteRangeAsync(auditLogsToDelete, cancellationToken: cancellationToken);
                 await auditLogRepository.SaveChangesAsync(cancellationToken);
 
                 logger.LogInformation(
@@ -239,7 +242,7 @@ public class AuditLogAppService(
     /// <returns>An analysis of user activity patterns.</returns>
     public async Task<UserActivityAnalysisResponseDto> GetUserActivityAnalysisAsync(UserActivityAnalysisRequestDto request, CancellationToken cancellationToken = default)
     {
-        var queryable = auditLogRepository.Query();
+        var queryable = auditLogRepository.GetQueryable();
         queryable = queryable.Include(item => item.EntityPropertyChanges);
         queryable = queryable.Where(item => item.CreationTime >= request.StartDate && item.CreationTime <= request.EndDate);
         queryable = queryable.WhereIf(request.UserId.HasValue, item => item.CreatorId == request.UserId);
@@ -318,7 +321,7 @@ public class AuditLogAppService(
     /// <returns>A list of the most frequently modified entities.</returns>
     public async Task<MostModifiedEntitiesResponseDto> GetMostModifiedEntitiesAsync(MostModifiedEntitiesRequestDto request, CancellationToken cancellationToken = default)
     {
-        var queryable = auditLogRepository.Query();
+        var queryable = auditLogRepository.GetQueryable();
         queryable = queryable.Include(item => item.EntityPropertyChanges);
         queryable = queryable.Where(item => item.CreationTime >= request.StartDate && item.CreationTime <= request.EndDate);
         queryable = queryable.WhereIf(request.UserId.HasValue, item => item.CreatorId == request.UserId);
@@ -397,7 +400,7 @@ public class AuditLogAppService(
         var startDateNormalized = request.StartDate.Date;
         var endDateNormalized = request.EndDate.Date.AddDays(1).AddTicks(-1);
 
-        var queryable = auditLogRepository.Query();
+        var queryable = auditLogRepository.GetQueryable();
         queryable = queryable.Include(a => a.EntityPropertyChanges);
         queryable = queryable.Where(a => a.EntityName == request.EntityName);
         queryable = queryable.Where(a =>
@@ -562,7 +565,7 @@ public class AuditLogAppService(
     /// <returns>An analysis of user change behavior patterns.</returns>
     public async Task<UserChangeBehaviorResponseDto> AnalyzeUserChangeBehaviorAsync(UserChangeBehaviorRequestDto request, CancellationToken cancellationToken = default)
     {
-        var queryable = auditLogRepository.Query();
+        var queryable = auditLogRepository.GetQueryable();
         queryable = queryable.Include(a => a.EntityPropertyChanges);
         queryable = queryable.Where(a => a.CreatorId == request.UserId);
         queryable = queryable.Where(a => a.CreationTime >= request.StartDate && a.CreationTime <= request.EndDate);

@@ -1,5 +1,5 @@
 using Fermion.EntityFramework.AuditLogs.Core.Entities;
-using Fermion.EntityFramework.AuditLogs.Core.Interfaces;
+using Fermion.EntityFramework.AuditLogs.Core.Interfaces.Repositories;
 using Fermion.EntityFramework.Shared.Repositories;
 using Microsoft.EntityFrameworkCore;
 

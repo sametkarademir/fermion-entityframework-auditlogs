@@ -1,6 +1,6 @@
 using System.Reflection;
+using Fermion.EntityFramework.AuditLogs.Core.Extensions;
 using Fermion.EntityFramework.AuditLogs.Core.Options;
-using Fermion.EntityFramework.AuditLogs.Extensions;
 using Fermion.EntityFramework.AuditLogs.Infrastructure.EntityConfigurations;
 using Fermion.EntityFramework.Shared.Extensions;
 using Microsoft.EntityFrameworkCore;

@@ -1,4 +1,4 @@
-using Fermion.EntityFramework.Shared.Repositories.Abstractions;
+using Fermion.EntityFramework.Shared.Interfaces;
 
 namespace WebApi.Repositories;
 

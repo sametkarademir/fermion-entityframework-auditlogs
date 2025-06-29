@@ -7,7 +7,7 @@ using Fermion.Extensions.HttpContexts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
-namespace Fermion.EntityFramework.AuditLogs.Extensions;
+namespace Fermion.EntityFramework.AuditLogs.Core.Extensions;
 
 /// <summary>
 /// Extension methods for adding audit logging functionality to Entity Framework Core DbContext.

@@ -2,6 +2,8 @@ using System.Reflection;
 using Fermion.Domain.Shared.Conventions;
 using Fermion.EntityFramework.AuditLogs.Application.Services;
 using Fermion.EntityFramework.AuditLogs.Core.Interfaces;
+using Fermion.EntityFramework.AuditLogs.Core.Interfaces.Repositories;
+using Fermion.EntityFramework.AuditLogs.Core.Interfaces.Services;
 using Fermion.EntityFramework.AuditLogs.Core.Options;
 using Fermion.EntityFramework.AuditLogs.Infrastructure.Repositories;
 using Fermion.EntityFramework.AuditLogs.Presentation.Controllers;

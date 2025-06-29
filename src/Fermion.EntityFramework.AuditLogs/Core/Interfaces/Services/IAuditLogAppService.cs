@@ -2,7 +2,7 @@ using Fermion.EntityFramework.AuditLogs.Application.DTOs.AuditLogs;
 using Fermion.EntityFramework.AuditLogs.Application.DTOs.EntityPropertyChanges;
 using Fermion.EntityFramework.Shared.DTOs.Pagination;
 
-namespace Fermion.EntityFramework.AuditLogs.Core.Interfaces;
+namespace Fermion.EntityFramework.AuditLogs.Core.Interfaces.Services;
 
 /// <summary>
 /// Application service interface for managing audit logs.
