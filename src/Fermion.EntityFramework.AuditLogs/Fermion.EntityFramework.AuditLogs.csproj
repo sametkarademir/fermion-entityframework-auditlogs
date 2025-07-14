@@ -9,7 +9,7 @@
         <Version>1.0.0</Version>
         <Authors>Samet Karademir</Authors>
         <Description>A shared library for Fermion Entity Framework Core extensions, including audit logging, repository, and unit of work patterns.</Description>
-        <PackageTags>dotnet;fermion;entityframework;auditlog;repository;unitofwork</PackageTags>
+        <PackageTags>dotnet;fermion;entityframework;auditlog;repository;unitofwork,entity</PackageTags>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageProjectUrl>https://github.com/sametkarademir/fermion-entityframework-auditlogs</PackageProjectUrl>
         <RepositoryUrl>https://github.com/sametkarademir/fermion-entityframework-auditlogs.git</RepositoryUrl>
