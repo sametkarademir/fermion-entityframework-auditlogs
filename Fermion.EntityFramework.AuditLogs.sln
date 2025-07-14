@@ -1,0 +1,21 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B4F35EBE-B278-4F66-9828-ABF881994307}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fermion.EntityFramework.AuditLogs", "src\Fermion.EntityFramework.AuditLogs\Fermion.EntityFramework.AuditLogs.csproj", "{8FC580CE-28D5-46A7-A9E6-9AF014B7D4BC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8FC580CE-28D5-46A7-A9E6-9AF014B7D4BC} = {B4F35EBE-B278-4F66-9828-ABF881994307}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8FC580CE-28D5-46A7-A9E6-9AF014B7D4BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FC580CE-28D5-46A7-A9E6-9AF014B7D4BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FC580CE-28D5-46A7-A9E6-9AF014B7D4BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FC580CE-28D5-46A7-A9E6-9AF014B7D4BC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
